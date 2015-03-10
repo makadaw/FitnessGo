@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+    "strconv"
 )
 
 type config struct {
@@ -65,6 +66,10 @@ func init() {
 	decoder := json.NewDecoder(file)
 	// overwrite in-mem config with new values
 	err = decoder.Decode(Config)
+    if len(os.Getenv("PORT")) > 0 {
+        port, _ := strconv.ParseInt(os.Getenv("PORT"), 10, 0)
+        Config.WebPort = int(port)
+    }
 	if err != nil {
 		fmt.Printf("Error decoding file %s\n%s\n", Path, err)
 	}
