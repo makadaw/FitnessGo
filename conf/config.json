@@ -3,7 +3,6 @@
     "WebHost": "127.0.0.1",
     "WebPort": 4000,
     "TemplatePreCompile": true,
-    "Debug": true,
-    "DbName": "fitness",
+    "Debug": false,
     "GoogleAnalyticsTrackingID": "UA-(your GA id)"
 }

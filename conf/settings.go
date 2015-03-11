@@ -19,6 +19,7 @@ type config struct {
 	DbHost string
 	DbPort int
 	DbName string
+    DbUrl string
 }
 
 var Path = "./config.json"
@@ -29,10 +30,14 @@ func (c *config) HostString() string {
 }
 
 func (c *config) DbHostString() string {
+    if len(c.DbUrl) > 0 {
+        return c.DbUrl
+    }
 	if c.DbPort > 0 {
 		return fmt.Sprintf("mongodb://%s:%d", c.DbHost, c.DbPort)
 	}
 	return fmt.Sprintf("mongodb://%s", c.DbHost)
+
 }
 
 func (c *config) String() string {
@@ -73,6 +78,9 @@ func init() {
     if len(os.Getenv("PORT")) > 0 {
         port, _ := strconv.ParseInt(os.Getenv("PORT"), 10, 0)
         Config.WebPort = int(port)
+    }
+    if len(os.Getenv("MONGOLAB_URI")) > 0 {
+        Config.DbUrl = os.Getenv("MONGOLAB_URI")
     }
 	if err != nil {
 		fmt.Printf("Error decoding file %s\n%s\n", Path, err)
