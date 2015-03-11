@@ -4,5 +4,6 @@
     "WebPort": 4000,
     "TemplatePreCompile": true,
     "Debug": false,
+    "DbName": "heroku_app34780380",
     "GoogleAnalyticsTrackingID": "UA-(your GA id)"
 }
