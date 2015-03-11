@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
     "strconv"
+    "log"
 )
 
 type config struct {
@@ -52,8 +53,11 @@ func init() {
 	Config.Debug = false
 	
     mode := os.Getenv("MARTINI_ENV")
-    if mode != "production" {
-        Path = "./config.dev.json"
+    log.Println("mode", mode)
+    if mode == "production" {
+        Path = "./conf/config.json"
+    } else {
+        Path = "./conf/config.dev.json"
     }
     
 	file, err := os.Open(Path)
