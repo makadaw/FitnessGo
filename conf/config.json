@@ -1,6 +1,6 @@
 {
     "SessionSecret": "SDFvcxSDEv34Fbs2qRbvzxzZXsafCX34r5BxzcSWThyhfdU&",
-    "WebHost": "127.0.0.1",
+    "WebHost": "",
     "WebPort": 4000,
     "TemplatePreCompile": true,
     "Debug": false,

@@ -77,6 +77,7 @@ func init() {
 	err = decoder.Decode(Config)
     if len(os.Getenv("PORT")) > 0 {
         port, _ := strconv.ParseInt(os.Getenv("PORT"), 10, 0)
+        log.Println("heroku port", port)
         Config.WebPort = int(port)
     }
     if len(os.Getenv("MONGOLAB_URI")) > 0 {
