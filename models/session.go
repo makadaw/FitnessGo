@@ -11,6 +11,7 @@ type Session struct {
 	Id            bson.ObjectId `bson:"_id,omitempty" json:"-"`
 	Code          string        `bson:"code" json:"code"`
 	UserId        bson.ObjectId `bson:"userId" json:"-"`
+    User          User          `bson:"user" json:"user"`
 	authenticated bool          `bson:"-" json:"-"`
 }
 
@@ -19,13 +20,16 @@ func init() {
 	db.Register(&Session{})
 }
 func (u Session) Indexes() [][]string {
-	return [][]string{[]string{"_id"}}
+    return nil
 }
 func (u Session) Collection() string {
 	return "sessions"
 }
 func (u Session) Unique() bson.M {
-	return bson.M{"_id": u.Id}
+    if len(u.Id) > 0 {
+        return bson.M{"_id": u.Id}
+    }
+    return bson.M{"code": u.Code}
 }
 func (u Session) PreSave() {
 }
@@ -58,8 +62,8 @@ func (self Session) Logout() {
 	self.authenticated = false
 }
 
-func CreateSessionForUser(user *User) Session {
-	session := Session{Code: rand_str(30), UserId: user.Id}
+func CreateSessionForUser(user User) Session {
+	session := Session{Code: rand_str(30), User: user}
 
 	return session
 }

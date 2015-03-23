@@ -6,7 +6,6 @@ import (
 	"fitness/models"
 	"fitness/services"
 	"github.com/go-martini/martini"
-	"log"
 	"net/http"
 )
 
@@ -16,8 +15,13 @@ type SessionsController struct {
 
 func (c SessionsController) Routes() []Route {
 	return []Route{
+        Route{"GET", "/:id", []martini.Handler{c.Check}},
 		Route{"POST", "/create", []martini.Handler{c.Create}},
 	}
+}
+
+func (s *SessionsController) Check(req *http.Request, r services.Render) {
+
 }
 
 func (s *SessionsController) Create(req *http.Request, r services.Render) {
@@ -27,7 +31,6 @@ func (s *SessionsController) Create(req *http.Request, r services.Render) {
 		session := models.CreateSessionForUser(user)
 		sessionauth.AuthenticateSession(session)
 		_, err = db.Upsert(session)
-		log.Println(err)
 		if err != nil {
 			r.Error(err)
 		} else {

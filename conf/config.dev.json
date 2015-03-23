@@ -1,9 +1,9 @@
 {
     "SessionSecret": "SDFvcxSDEv34Fbs2qRbvzxzZXsafCX34r5BxzcSWThyhfdU&",
     "WebHost": "127.0.0.1",
-    "WebPort": 3001,
+    "WebPort": 4000,
     "TemplatePreCompile": true,
     "Debug": true,
-    "DbName": "fitness",
+    "DbName": "heroku_app34780380",
     "GoogleAnalyticsTrackingID": "UA-(your GA id)"
 }

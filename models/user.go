@@ -82,8 +82,8 @@ func RegisterUser(email, password, confirm_password string) (*User, error) {
 	return &user, nil
 }
 
-func FindUserByIdAndPassword(email string, password string) (*User, error) {
-	user := new(User)
+func FindUserByIdAndPassword(email string, password string) (User, error) {
+	user := User{}
 	db.Find(user, bson.M{"email": email}).One(user)
 	if len(user.Email) > 0 {
 		err := bcrypt.CompareHashAndPassword(user.Password, []byte(password))
